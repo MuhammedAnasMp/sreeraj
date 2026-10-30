@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { WeddingEventData } from '@/lib/events';
+import { trackEvent } from '@/lib/analytics';
 
 interface VenueSectionProps {
   data: WeddingEventData;
@@ -69,6 +70,7 @@ export default function VenueSection({ data }: VenueSectionProps) {
             href={data.mapUrl}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackEvent('map_open', { venue: data.venueName, mapUrl: data.mapUrl })}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-gradient-to-r from-[#E91E63] via-[#C2185B] to-[#880E4F] text-white text-xs md:text-sm font-semibold rounded-full shadow-[0_6px_18px_rgba(194,24,91,0.35)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(194,24,91,0.45)]"
           >
             <span>🗺️</span>
@@ -77,6 +79,7 @@ export default function VenueSection({ data }: VenueSectionProps) {
 
           <a
             href={`tel:${data.phone}`}
+            onClick={() => trackEvent('phone_call', { phone: data.phone })}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white/70 hover:bg-white/90 border border-[#D4AF37]/40 text-[#2D1525] text-xs md:text-sm font-semibold rounded-full shadow-xs transition-all duration-300 hover:-translate-y-0.5"
           >
             <span>📞</span>
@@ -87,6 +90,7 @@ export default function VenueSection({ data }: VenueSectionProps) {
             href={`https://wa.me/${data.whatsappNumber}?text=${encodeURIComponent(data.whatsappMsg)}`}
             target="_blank"
             rel="noopener noreferrer"
+            onClick={() => trackEvent('whatsapp_wishes_click', { number: data.whatsappNumber })}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-[#25D366] hover:bg-[#20ba5a] text-white text-xs md:text-sm font-semibold rounded-full shadow-[0_6px_18px_rgba(37,211,102,0.3)] transition-all duration-300 hover:-translate-y-0.5"
           >
             <span>💬</span>

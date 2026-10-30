@@ -11,6 +11,7 @@ import FamilyUnionSection from './FamilyUnionSection';
 import ScheduleSection from './ScheduleSection';
 import CountdownSection from './CountdownSection';
 import VenueSection from './VenueSection';
+import RsvpSection from './RsvpSection';
 import ClosingSection from './ClosingSection';
 
 interface WeddingViewProps {
@@ -48,8 +49,11 @@ export default function WeddingView({ eventType = 'invitation' }: WeddingViewPro
         {/* Live Countdown Timer & Calendar */}
         <CountdownSection data={data} />
 
-        {/* Venue, Maps & RSVP */}
+        {/* Venue, Maps & Directions */}
         <VenueSection data={data} />
+
+        {/* Guest Attendance Confirmation Form */}
+        <RsvpSection data={data} />
 
         {/* Closing Greetings & Share */}
         <ClosingSection data={data} />

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { WeddingEventData } from '@/lib/events';
+import { trackEvent } from '@/lib/analytics';
 
 interface CountdownSectionProps {
   data: WeddingEventData;
@@ -73,8 +74,10 @@ export default function CountdownSection({ data }: CountdownSectionProps) {
 
     const userChoice = confirm('Click OK to open Google Calendar, or Cancel to download an iCal (.ics) file.');
     if (userChoice) {
+      trackEvent('calendar_add_google', { eventId: data.id });
       window.open(googleCalUrl, '_blank');
     } else {
+      trackEvent('calendar_add_ics', { eventId: data.id });
       const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
       const link = document.createElement('a');
       link.href = window.URL.createObjectURL(blob);

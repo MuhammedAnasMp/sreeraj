@@ -2,6 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { WeddingEventData } from '@/lib/events';
+import { trackEvent } from '@/lib/analytics';
 
 interface AudioControllerProps {
   data?: WeddingEventData;
@@ -18,19 +19,27 @@ export default function AudioController({ data }: AudioControllerProps) {
     if (isPlaying) {
       audioRef.current.pause();
       setIsPlaying(false);
+      trackEvent('audio_pause');
     } else {
       audioRef.current
         .play()
-        .then(() => setIsPlaying(true))
+        .then(() => {
+          setIsPlaying(true);
+          trackEvent('audio_play');
+        })
         .catch((err) => console.log('Audio autoplay prevented:', err));
     }
   };
 
   const handleOpenInvitation = () => {
+    trackEvent('invitation_opened', { eventType: data?.id || 'invitation' });
     if (audioRef.current) {
       audioRef.current
         .play()
-        .then(() => setIsPlaying(true))
+        .then(() => {
+          setIsPlaying(true);
+          trackEvent('audio_play_on_open');
+        })
         .catch((err) => console.log('Playback error:', err));
     }
     setIsExiting(true);

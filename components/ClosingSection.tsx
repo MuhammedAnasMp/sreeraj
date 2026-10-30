@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { WeddingEventData } from '@/lib/events';
+import { trackEvent } from '@/lib/analytics';
 
 interface ClosingSectionProps {
   data: WeddingEventData;
@@ -9,6 +10,7 @@ interface ClosingSectionProps {
 
 export default function ClosingSection({ data }: ClosingSectionProps) {
   const handleShare = async () => {
+    trackEvent('share_click');
     const shareData = {
       title: data.pageTitle,
       text: `You are cordially invited to celebrate the ${data.tagline} of Sreeraj & Suji on December 30, 2026.`,
