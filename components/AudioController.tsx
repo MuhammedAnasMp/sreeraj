@@ -6,9 +6,10 @@ import { trackEvent } from '@/lib/analytics';
 
 interface AudioControllerProps {
   data?: WeddingEventData;
+  onOpen?: () => void;
 }
 
-export default function AudioController({ data }: AudioControllerProps) {
+export default function AudioController({ data, onOpen }: AudioControllerProps) {
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [isOpened, setIsOpened] = useState<boolean>(false);
   const [isExiting, setIsExiting] = useState<boolean>(false);
@@ -46,6 +47,7 @@ export default function AudioController({ data }: AudioControllerProps) {
     setTimeout(() => {
       setIsOpened(true);
       document.body.style.overflow = '';
+      onOpen?.();
     }, 600);
   };
 
