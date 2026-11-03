@@ -14,6 +14,7 @@ import CountdownSection from './CountdownSection';
 import VenueSection from './VenueSection';
 import RsvpSection from './RsvpSection';
 import ClosingSection from './ClosingSection';
+import BottomShareAndPromo from './BottomShareAndPromo';
 
 interface WeddingViewProps {
   eventType?: EventType;
@@ -62,6 +63,13 @@ export default function WeddingView({ eventType = 'invitation' }: WeddingViewPro
 
         {/* Closing Greetings & Share */}
         <ClosingSection data={data} />
+
+        {/* Promotion & Inquiry Card */}
+        <BottomShareAndPromo
+          whatsappMessage={`Hello! I would like to create a wedding invitation website like Sreeraj & Suji. Please share details!`}
+          shareTitle={data.pageTitle}
+          shareText={`Join us in celebrating the ${data.tagline} of Sreeraj & Suji!`}
+        />
       </div>
     </main>
   );
